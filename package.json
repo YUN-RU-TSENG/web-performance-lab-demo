@@ -11,6 +11,10 @@
         "lint": "eslint \"src/**/*.{js,vue}\"",
         "lint:fix": "eslint \"src/**/*.{js,vue}\" --fix"
     },
+    "engines": {
+        "node": "18.5.0",
+        "npm": "8.12.1"
+    },
     "dependencies": {
         "vue": "^3.2.47"
     },
