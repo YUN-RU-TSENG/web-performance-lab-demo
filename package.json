@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "format": "prettier -w .",
-    "lint": "eslint \"src/**/*.{js,vue}\""
+    "lint": "eslint \"src/**/*.{js,vue}\"",
+    "lint:fix": "eslint \"src/**/*.{js,vue}\" --fix"
   },
   "dependencies": {
     "vue": "^3.2.47"
