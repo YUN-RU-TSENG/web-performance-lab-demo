@@ -1,12 +1,12 @@
 <script setup>
     import { ref } from "vue"
-    import _ from "lodash"
+    import { reverse } from "@/utils/lodash"
 
     const testData = ref([1, 2, 3, 4, 5, 6, 7])
 
     function reverseTestData() {
         const data = testData.value.slice()
-        testData.value = _.reverse(data)
+        testData.value = reverse(data)
     }
 </script>
 
