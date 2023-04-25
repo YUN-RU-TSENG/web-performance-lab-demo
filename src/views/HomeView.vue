@@ -35,6 +35,11 @@
                         >PageB</a
                     >
                 </li>
+                <li>
+                    <a href @click.prevent="$router.push({ name: 'c' })"
+                        >PageC</a
+                    >
+                </li>
             </ul>
         </section>
     </div>

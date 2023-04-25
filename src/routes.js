@@ -23,6 +23,12 @@ const router = createRouter({
             meta: { requiresAuth: true }, // 設置需要登錄才能訪問
         },
         {
+            path: "/c",
+            name: "c",
+            component: () => import("./views/PageCView.vue"),
+            meta: { requiresAuth: true }, // 設置需要登錄才能訪問
+        },
+        {
             path: "/login",
             name: "login",
             component: () => import("./views/LoginView.vue"),
