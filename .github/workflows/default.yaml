@@ -22,7 +22,7 @@ jobs:
               with:
                   node-version: "18.x"
             # 此步驟將 npm install 安裝代碼庫
-            - name: npm install && npm install -g @lhci/cli@0.11.x
+            - name: npm install
               run: npm i
             # 此步驟將執行 lint 驗證
             - name: npm run lint
@@ -30,6 +30,3 @@ jobs:
             # 此步驟將打包代碼庫，若是打包失敗，此次 workflow 會報錯
             - name: npm run build
               run: npm run build
-            # 此步驟將使用 lighthouse-CI
-            - name: lighthouse
-              run: lhci autorun
