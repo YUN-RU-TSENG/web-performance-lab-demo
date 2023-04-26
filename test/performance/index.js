@@ -7,7 +7,7 @@ const DEV_HOST = "http://localhost:5174"
 const PROD_HOST = ""
 const HOST = process.env.NODE_ENV == "dev" ? DEV_HOST : PROD_HOST
 
-;(async () => {
+async function runLighthouseTest() {
     try {
         const USER = { username: "kminchelle", password: "0lelplR" }
 
@@ -46,7 +46,7 @@ const HOST = process.env.NODE_ENV == "dev" ? DEV_HOST : PROD_HOST
         console.log(error)
         console.log("---")
     }
-})()
+}
 
 async function generatedPerformanceResult(browser, page, routes) {
     for (const route of routes) {
@@ -94,3 +94,5 @@ async function login(page, username, password) {
     await page.waitForNavigation((response) => response.ok())
     console.log(`目前為 ${DEV_HOST}，已登入`)
 }
+
+runLighthouseTest()
