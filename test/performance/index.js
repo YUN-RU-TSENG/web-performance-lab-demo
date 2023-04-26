@@ -9,54 +9,19 @@ const HOST = process.env.NODE_ENV == "dev" ? DEV_HOST : PROD_HOST
 
 ;(async () => {
     try {
-        // 啟動 Puppeteer
-        const browser = await puppeteer.launch({
-            headless: true,
-            executablePath: "/opt/homebrew/bin/chromium",
-        })
-
-        const page = await browser.newPage()
-
-        // 定義 SPA 的每個路由
-        const guestRoutes = [{ path: "/login", id: "login" }]
-
-        // 遍歷每個路由
-        for (const route of guestRoutes) {
-            // 前往路由
-            const url = new URL(route.path, HOST)
-
-            await page.goto(url.toString(), { waitUntil: "domcontentloaded" })
-
-            console.log(`:shamrock: 執行${route.id}頁面的效能判定`)
-
-            // 運行 Lighthouse
-            const runnerResult = await lighthouse(url.toString(), {
-                port: new URL(browser.wsEndpoint()).port,
-                output: "html",
-                logLevel: "error",
-                onlyCategories: ["performance"],
-            })
-
-            console.log(
-                `:shamrock: 完成${route.id}頁面的效能判定，正在輸出結果`
-            )
-            // 輸出 Lighthouse 結果
-            const reportHtml = runnerResult.report
-            fs.writeFileSync(
-                `test/performance/lighthouse-results-${route.id}.html`,
-                reportHtml
-            )
-            console.log(
-                `:shamrock: 完成${route.id}頁面的效能判定，輸出結果完成`
-            )
-        }
-
         const USER = { username: "kminchelle", password: "0lelplR" }
 
-        // 登入網站
-        await login(page, USER.username, USER.password)
+        // 啟動 Puppeteer
+        const browser = await puppeteer.launch({
+            headless: true, // 不需要打開瀏覽器，也可以打開實時觀察
+            executablePath: "/opt/homebrew/bin/chromium", // 指定瀏覽器位置
+        })
+        const page = await browser.newPage()
 
-        // 定義 SPA 的每個路由
+        // 定義 SPA 的每個不需要登入路由
+        const guestRoutes = [{ path: "/login", id: "login" }]
+
+        // 定義 SPA 的每個需要登入路由
         const authRoutes = [
             { path: "/", id: "home" },
             { path: "/a", id: "a" },
@@ -64,36 +29,14 @@ const HOST = process.env.NODE_ENV == "dev" ? DEV_HOST : PROD_HOST
             { path: "/c", id: "c" },
         ]
 
-        // 遍歷每個路由
-        for (const route of authRoutes) {
-            // 前往路由
-            const url = new URL(route.path, HOST)
+        // 生成不需要登入路由的效能結果
+        await generatedPerformanceResult(browser, page, guestRoutes)
 
-            await page.goto(url.toString(), { waitUntil: "domcontentloaded" })
+        // 登入網站
+        await login(page, USER.username, USER.password)
 
-            console.log(`:shamrock: 執行${route.id}頁面的效能判定`)
-
-            // 運行 Lighthouse
-            const runnerResult = await lighthouse(url.toString(), {
-                port: new URL(browser.wsEndpoint()).port,
-                output: "html",
-                logLevel: "error",
-                onlyCategories: ["performance"],
-            })
-
-            console.log(
-                `:shamrock: 完成${route.id}頁面的效能判定，正在輸出結果`
-            )
-            // 輸出 Lighthouse 結果
-            const reportHtml = runnerResult.report
-            fs.writeFileSync(
-                `test/performance/lighthouse-results-${route.id}.html`,
-                reportHtml
-            )
-            console.log(
-                `:shamrock: 完成${route.id}頁面的效能判定，輸出結果完成`
-            )
-        }
+        // 生成需要登入路由的效能結果
+        await generatedPerformanceResult(browser, page, authRoutes)
 
         // 關閉 Puppeteer
         await browser.close()
@@ -104,6 +47,34 @@ const HOST = process.env.NODE_ENV == "dev" ? DEV_HOST : PROD_HOST
         console.log("---")
     }
 })()
+
+async function generatedPerformanceResult(browser, page, routes) {
+    for (const route of routes) {
+        // 前往路由
+        const url = new URL(route.path, HOST)
+
+        await page.goto(url.toString(), { waitUntil: "domcontentloaded" })
+
+        console.log(`:shamrock: 執行${route.id}頁面的效能判定`)
+
+        // 運行 Lighthouse
+        const runnerResult = await lighthouse(url.toString(), {
+            port: new URL(browser.wsEndpoint()).port,
+            output: "html",
+            logLevel: "error",
+            onlyCategories: ["performance"],
+        })
+
+        console.log(`:shamrock: 完成${route.id}頁面的效能判定，正在輸出結果`)
+        // 輸出 Lighthouse 結果
+        const reportHtml = runnerResult.report
+        fs.writeFileSync(
+            `test/performance/lighthouse-results-${route.id}.html`,
+            reportHtml
+        )
+        console.log(`:shamrock: 完成${route.id}頁面的效能判定，輸出結果完成`)
+    }
+}
 
 async function login(page, username, password) {
     // 前往登入頁面
