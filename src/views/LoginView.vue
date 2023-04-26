@@ -5,8 +5,8 @@
 
     // 用戶資料
     const user = ref({
-        username: "kminchelle",
-        password: "0lelplR",
+        username: "",
+        password: "",
     })
 
     // 登入
@@ -28,10 +28,25 @@
                 <div>Loading...</div>
             </template>
             <template v-else>
-                <form @click.prevent="() => handleSubmit({ ...user })">
-                    <input v-model="user.username" type="text" required />
-                    <input v-model="user.password" type="password" required />
-                    <input type="submit" />
+                <form
+                    id="login-form"
+                    @submit.prevent="() => handleSubmit({ ...user })"
+                >
+                    <input
+                        id="username"
+                        v-model="user.username"
+                        type="text"
+                        placeholder="kminchelle"
+                        required
+                    />
+                    <input
+                        id="password"
+                        v-model="user.password"
+                        placeholder="0lelplR"
+                        type="password"
+                        required
+                    />
+                    <input id="login-button" type="submit" />
                 </form>
             </template>
         </section>

@@ -9,10 +9,12 @@
         "format": "prettier -w .",
         "lint": "eslint \"src/**/*.{js,vue}\"",
         "lint:fix": "eslint \"src/**/*.{js,vue}\" --fix",
+        "lighthouse:dev": "export NODE_ENV=dev PUPPETEER_EXPERIMENTAL_CHROMIUM_MAC_ARM=true && node test/performance/index.js ",
+        "lighthouse:prod": "export NODE_ENV=prod && node test/performance/index.js",
         "prepare": "husky install"
     },
     "engines": {
-        "node": "18.5.0",
+        "node": "v18.5.0",
         "npm": "8.12.1"
     },
     "dependencies": {
@@ -32,9 +34,11 @@
         "eslint-config-prettier": "^8.8.0",
         "eslint-plugin-vue": "^9.10.0",
         "husky": "^8.0.0",
+        "lighthouse": "^10.1.1",
         "lint-staged": "^13.2.0",
         "postcss-nested": "^6.0.1",
         "prettier": "2.8.7",
+        "puppeteer": "^18.2.1",
         "unplugin-vue-components": "^0.24.1",
         "vite": "^4.2.0"
     }
