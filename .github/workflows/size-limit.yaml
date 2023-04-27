@@ -8,6 +8,16 @@ jobs:
         env:
             CI_JOB_NUMBER: 1
         steps:
+            # actions/checkout@3 是 github action 中預先定義的 action，會將我們的代碼庫複製到 github action runner 執行工作時所在的目錄。
+            - uses: actions/checkout@v3
+            # 此步驟將安裝指定版本的 Node
+            - name: use Node 18
+              uses: actions/setup-node@v3
+              with:
+                  node-version: "18.x"
+            # 此步驟將 npm install 安裝代碼庫
+            - name: npm install
+              run: npm i
             - uses: actions/checkout@v1
             - uses: andresz1/size-limit-action@v1
               with:
