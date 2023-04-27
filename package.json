@@ -20,7 +20,7 @@
     "dependencies": {
         "chart.js": "^4.2.1",
         "dayjs": "^1.11.7",
-        "lodash": "^4.17.21",
+        "lodash-es": "^4.17.21",
         "pinia": "^2.0.35",
         "vue": "^3.2.47",
         "vue-chartjs": "^5.2.0",
