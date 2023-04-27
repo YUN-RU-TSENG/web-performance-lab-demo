@@ -1,0 +1,28 @@
+{
+    "files": [
+        {
+            "path": "dist/assets/PageAView-*.js",
+            "maxSize": "100 kB"
+        },
+        {
+            "path": "dist/assets/PageBView-*.js",
+            "maxSize": "100 kB"
+        },
+        {
+            "path": "dist/assets/PageCView-*.js",
+            "maxSize": "100 kB"
+        },
+        {
+            "path": "dist/assets/LoginView-*.js",
+            "maxSize": "100 kB"
+        },
+        {
+            "path": "dist/assets/NotFoundView-*.js",
+            "maxSize": "100 kB"
+        },
+        {
+            "path": "dist/assets/HomeView-*.js",
+            "maxSize": "100 kB"
+        }
+    ]
+}
