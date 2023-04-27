@@ -10,6 +10,13 @@ export default defineConfig((config) => ({
     // 關閉使用 ESBuild minify CSS，改使用 postCSS cssnano，設置見 postcss.config.cjs
     build: {
         cssMinify: false,
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    chart: ["vue-chartjs", "chart.js"],
+                },
+            },
+        },
     },
     // build production 時刪除 console、debugger
     esbuild: {

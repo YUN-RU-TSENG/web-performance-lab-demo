@@ -3,7 +3,7 @@ import lighthouse from "lighthouse"
 import fs from "fs"
 import { URL } from "url"
 
-const DEV_HOST = "http://localhost:5174"
+const DEV_HOST = "http://localhost:4173"
 const PROD_HOST = ""
 const HOST = process.env.NODE_ENV == "dev" ? DEV_HOST : PROD_HOST
 

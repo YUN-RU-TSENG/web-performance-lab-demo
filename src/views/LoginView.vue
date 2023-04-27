@@ -24,6 +24,10 @@
     <div>
         <div>Login</div>
         <section>
+            <div>
+                <p>kminchelle</p>
+                <p>0lelplR</p>
+            </div>
             <template v-if="userStore.isLoading">
                 <div>Loading...</div>
             </template>

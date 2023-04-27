@@ -7,6 +7,7 @@
         "build": "vite build",
         "preview": "vite preview",
         "format": "prettier -w .",
+        "size": "npm run build && size-limit",
         "lint": "eslint \"src/**/*.{js,vue}\"",
         "lint:fix": "eslint \"src/**/*.{js,vue}\" --fix",
         "lighthouse:dev": "export NODE_ENV=dev PUPPETEER_EXPERIMENTAL_CHROMIUM_MAC_ARM=true && node test/performance/index.js ",
@@ -20,13 +21,14 @@
     "dependencies": {
         "chart.js": "^4.2.1",
         "dayjs": "^1.11.7",
-        "lodash": "^4.17.21",
+        "lodash-es": "^4.17.21",
         "pinia": "^2.0.35",
         "vue": "^3.2.47",
         "vue-chartjs": "^5.2.0",
         "vue-router": "^4.1.6"
     },
     "devDependencies": {
+        "@size-limit/file": "^8.2.4",
         "@vitejs/plugin-vue": "^4.1.0",
         "autoprefixer": "^10.4.14",
         "cssnano": "^6.0.0",
@@ -40,6 +42,7 @@
         "prettier": "2.8.7",
         "puppeteer": "^18.2.1",
         "rollup-plugin-visualizer": "^5.9.0",
+        "size-limit": "^8.2.4",
         "unplugin-vue-components": "^0.24.1",
         "vite": "^4.2.0"
     }
